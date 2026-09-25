@@ -5,6 +5,7 @@ ARG CHAINSAW_VERSION=v0.2.15
 ARG KUBECTL_VERSION=v1.37.0
 ARG HELM_VERSION=v4.3.0
 ARG KUSTOMIZE_VERSION=v5.8.1
+ARG STERN_VERSION=v1.34.0
 ARG TARGETOS
 ARG TARGETARCH
 
@@ -21,6 +22,7 @@ RUN curl -L -o /tmp/helm.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-$
   tar -C /usr/local/bin -xvf /tmp/helm.tar.gz --strip-components=1 --wildcards '*/helm'
 RUN curl -L -o /tmp/kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
   tar -C /usr/local/bin -xvf /tmp/kustomize.tar.gz
+RUN curl -L -o /tmp/stern.tar.gz https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_${TARGETARCH#v}.tar.gz
 
 FROM alpine:3
 
