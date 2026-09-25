@@ -39,3 +39,14 @@ jobs:
         uses: cycjimmy/semantic-release-action@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Annotate job with version
+        env:
+          PUBLISHED: ${{ steps.semrel.outputs.new_release_published }}
+          VERSION: ${{ steps.semrel.outputs.new_release_version }}
+        run: |
+          if [ "$PUBLISHED" = "true" ]; then
+            echo "::notice title=Version::New version: $VERSION"
+          else
+            echo "::notice title=Version::No new version"
+          fi
